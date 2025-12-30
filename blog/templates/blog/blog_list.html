@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blogs</title>
+</head>
+<body>
+<a href="{% url 'blog-create-page' %}">Create New Blog</a>
+<hr>
+
+<h1>Blog List</h1>
+
+{% for blog in blogs %}
+    <h2>{{ blog.title }}</h2>
+    <p>{{ blog.content }}</p>
+    <p>Author: {{ blog.author }}</p>
+
+    <a href="{% url 'blog-edit-page' blog.id %}">Edit</a>
+
+    <form action="{% url 'blog-delete-page' blog.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+    </form>
+
+    <hr>
+{% endfor %}
+
+</body>
+</html>
